@@ -20,7 +20,7 @@ defmodule Sudoku.Solver.Worker do
         Enum.each(others, fn puz -> Manager.queue(manager, puz) end)
         solve(next, manager)
 
-      {:error, err} ->
+      {:error, _err} ->
         :error
     end
   end
@@ -33,7 +33,7 @@ defmodule Sudoku.Solver.Worker do
       {0, row, col, []} ->
         {:error, "No possible value for row #{row + 1}, column #{col + 1}"}
 
-      {n, row, col, options} ->
+      {_count, row, col, options} ->
         {:pending,
          Enum.map(options, fn opt ->
            Puzzle.put_value(puzzle, row, col, opt)

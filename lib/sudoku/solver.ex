@@ -1,5 +1,4 @@
 defmodule Sudoku.Solver do
-  alias Sudoku.Puzzle.Verify
   alias Sudoku.Solver.Manager
 
   def solve(puzzle) do
