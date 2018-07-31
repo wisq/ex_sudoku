@@ -36,6 +36,8 @@ On my 2013 Macbook Pro, the Ruby version (`other/sudoku.rb`) can solve the harde
 
 The Elixir version tends to take about 4.7 seconds of CPU time.  However, it also uses around 475% CPU, meaning it solves the hardest puzzle in only 1.0 seconds of clock time.
 
+Results on a more modern CPU (an 8-core i7-6700K) are similar: In Ruby, ~2.5 seconds; in Elixir, 2.9 CPU seconds, but only 0.5 clock seconds.  CPU is over 500% and `max_active` can reach upwards of 30 on some runs.
+
 ## Conclusion
 
 All in all, a decently successful approach.
