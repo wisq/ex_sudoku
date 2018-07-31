@@ -24,7 +24,9 @@ Most of the complexity is in the `Sudoku.Solver.Manager` module that launches an
 ## Usage
 
 * Elixir version: `mix solve <file>`
+  * This uses the algorithm as described above.
 * Ruby version: `ruby other/sudoku.rb <file>`
+  * This uses a basically similar algorithm, except it simply tries each possible value in sequence, rather than launching extra workers or doing any sort of concurrency.
 
 There are no dependencies, so no `mix deps.get` is required.
 
