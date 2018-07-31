@@ -1,5 +1,6 @@
 defmodule Sudoku.Solver.Manager do
   use GenServer
+  alias Sudoku.Puzzle.Verify
   alias Sudoku.Solver.Worker
 
   # Print a dot every 100th worker we launch.
@@ -29,6 +30,7 @@ defmodule Sudoku.Solver.Manager do
   end
 
   def solved(pid, puzzle) do
+    Verify.verify(puzzle)
     GenServer.cast(pid, {:solved, puzzle})
   end
 
