@@ -103,6 +103,8 @@ end
 queue = [Board.from_file(ARGV.first)]
 solved = []
 
+start = Time.now
+
 until queue.empty?
   board = queue.shift
   begin
@@ -116,7 +118,9 @@ until queue.empty?
   end
 end
 
-puts "#{solved.count} solutions:"
+duration = "%.2f" % [(Time.now - start) * 1000]
+
+puts "#{solved.count} solutions in #{duration} ms:"
 solved.each do |board|
   puts
   puts board.to_string
