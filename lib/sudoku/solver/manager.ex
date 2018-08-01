@@ -87,10 +87,10 @@ defmodule Sudoku.Solver.Manager do
 
   defp wait_reply(state) do
     {state.solutions,
-     [
+     %{
        launched: state.launched,
        max_active: state.max_active
-     ]}
+     }}
   end
 
   @impl true

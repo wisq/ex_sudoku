@@ -124,9 +124,12 @@ defmodule Sudoku.Puzzle do
     |> Enum.chunk_every(3)
     |> Enum.map(fn chunk ->
       chunk
-      |> Enum.map(&Integer.to_string/1)
+      |> Enum.map(&cell_to_string/1)
       |> Enum.join("")
     end)
     |> Enum.join(" ")
   end
+
+  defp cell_to_string(nil), do: "_"
+  defp cell_to_string(n) when is_integer(n), do: Integer.to_string(n)
 end
