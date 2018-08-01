@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/puz2.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.6.6</li>
+    <li>Erlang: 21.0</li>
+    <li>Operating system: Linux</li>
+    <li>Available memory: 137.48 GB</li>
+    <li>CPU Information: Intel(R) Xeon(R) Platinum 8124M CPU @ 3.00GHz</li>
+    <li>Number of Available Cores: 72</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        <a name="ruby"></a>
+        ruby
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#individual">
+          <i
+            class="benchee-help-icon icon-question-circle-o"
+            title="Graphs showing the individual run time distribution for ruby.
+Run Times Histogram shows the distribution of occurrences of specific run times in buckets.
+Raw Run Times shows all individual recorded run times in the order they were recorded in."
+          ></i>
+        </a>
+      </h2>
+
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left">ruby</td>
+        
+        <td>15.60</td>
+        <td>64.11 ms</td>
+        <td>±0.60%</td>
+        <td>63.96 ms</td>
+        <td>63.69 ms</td>
+        <td>66.87 ms</td>
+        <td>468</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="sorted-run-times" class="plot" data-job-name="ruby"></div>
+      </section>
+      <section class="benchee-plot-container">
+        <div id="raw-run-times" class="plot" data-job-name="ruby"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var measurements = {"run_times":[63929,63807,63844,64014,64025,64057,64785,63801,64013,64018,63985,63970,64612,63897,64099,65153,63988,64914,63983,63929,63810,63946,64257,63843,63924,64212,63996,64313,63930,63923,63923,63933,63840,63964,63888,63910,64678,63858,63964,64577,63996,64011,63974,64011,63783,64866,63951,63904,64147,64298,63895,63882,64351,63899,64516,63987,63725,64362,64918,63765,65214,63823,63691,64816,63877,65472,64261,64212,63884,63853,63903,63736,63865,64031,63801,63869,64900,63799,64911,64037,63983,64535,63928,63998,63964,64059,63945,63794,64048,63933,63840,63939,64108,63801,64082,63844,63763,63949,63867,63809,63877,63892,63948,63799,63793,63838,63785,63947,63892,63995,63948,63941,64595,64448,63793,63959,63889,63802,63918,63877,64641,63876,64446,64444,63885,63975,63707,64079,64114,64048,65027,63909,64156,64952,63994,63839,63992,64053,63919,64006,65005,65056,63902,64265,63808,64102,63964,63779,63845,63931,63805,63839,63920,63801,64078,63853,64012,65225,63975,63871,63783,63981,63841,64793,64083,63967,64123,64073,63894,63851,63897,64036,64167,64136,63995,64208,65054,64223,63817,64014,63905,64915,63779,63871,63899,64289,63898,63858,63917,64577,63827,64360,64173,64882,63821,63933,63839,63870,65281,63738,63857,64057,63975,63976,63994,63801,64031,64001,63861,63795,64090,63863,63997,64072,64623,63856,63976,64163,65601,64008,64039,63884,64525,63994,64258,63941,64013,63820,64484,63988,64574,64539,63977,64354,63869,64197,63959,64611,64326,63897,64009,64012,63808,64711,63846,64115,63864,63872,63860,64226,64075,64143,64145,64358,64702,63923,64191,63874,63871,63899,63737,64195,63972,64011,63836,63858,63776,63869,64174,64486,64233,64819,63920,64079,63989,63892,63798,63925,64305,64605,63985,63804,63818,63939,63840,64173,63892,63813,63858,63846,63918,63783,63915,64644,64356,64131,65210,63834,63885,63821,63838,63828,63759,63807,63820,64897,64051,63846,63963,63731,64489,63826,63708,63938,63853,64003,64679,64569,63805,64614,63930,64010,64647,63922,63734,63996,64007,63898,63923,63982,63806,64118,64185,63883,63854,63939,63767,63892,64005,63914,64075,64013,63929,64478,63960,63850,64952,64520,63919,64153,63979,64612,64400,63933,64182,63775,63996,63832,64836,63795,64331,64916,63877,64245,63757,64078,64066,63893,63927,64266,63757,64373,66873,63850,63952,64886,63922,65090,64221,64386,66100,63928,64603,63886,63963,64017,63895,64405,64468,64623,63872,63920,63900,64707,63812,65668,64157,63903,63941,63904,63733,63896,63943,64200,63848,63884,63886,63843,64453,64531,63818,63920,64309,63879,64684,64858,63802,63819,64569,63778,64832,63950,63880,64100,63963,63979,63955,64015,63887,63982,63881,64947,63864,63889,64569,64192,65122,63790,63942,63811,64128,64350,64345,63787,63891,63852,63986,64153,64037,63900,63818,64063,64007,64046,64626,63854,64003,64524,63951,64506,64054,63869,64104,63998,64322,65050,64138,63871],"statistics":{"average":64105.11111111111,"ips":15.59938018462733,"maximum":66873,"median":63964.0,"minimum":63691,"mode":[63801,63892],"percentiles":{"50":63964.0,"99":65511.99},"sample_size":468,"std_dev":384.27074965597,"std_dev_ips":0.09350869866406397,"std_dev_ratio":0.005994385517715228}};
+      var runTimes     = measurements.run_times;
+      var statistics   = measurements.statistics;
+
+      var inputHeadline = " (data/puz2.txt)"
+
+      drawRawRunTimeCharts(runTimes, inputHeadline, statistics);
+      drawRunTimeHistograms(runTimes, inputHeadline);
+    </script>
+  </body>
+</html>

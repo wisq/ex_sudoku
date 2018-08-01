@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/puz4.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.6.6</li>
+    <li>Erlang: 21.0</li>
+    <li>Operating system: Linux</li>
+    <li>Available memory: 137.48 GB</li>
+    <li>CPU Information: Intel(R) Xeon(R) Platinum 8124M CPU @ 3.00GHz</li>
+    <li>Number of Available Cores: 72</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        <a name="managed (10000)"></a>
+        managed (10000)
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#individual">
+          <i
+            class="benchee-help-icon icon-question-circle-o"
+            title="Graphs showing the individual run time distribution for managed (10000).
+Run Times Histogram shows the distribution of occurrences of specific run times in buckets.
+Raw Run Times shows all individual recorded run times in the order they were recorded in."
+          ></i>
+        </a>
+      </h2>
+
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left">managed (10000)</td>
+        
+        <td>7.94</td>
+        <td>126.02 ms</td>
+        <td>±4.70%</td>
+        <td>126.71 ms</td>
+        <td>108.05 ms</td>
+        <td>140.03 ms</td>
+        <td>239</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="sorted-run-times" class="plot" data-job-name="managed (10000)"></div>
+      </section>
+      <section class="benchee-plot-container">
+        <div id="raw-run-times" class="plot" data-job-name="managed (10000)"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var measurements = {"run_times":[122609,125854,123426,119115,125998,123574,130083,130358,132569,131483,127451,137954,128791,122940,130852,131408,124631,129857,131499,128434,132010,128632,123230,135913,140034,130368,133532,132673,130776,131878,131550,133962,123390,120120,128428,128079,127878,128919,132308,137084,135943,127327,133364,129498,130448,122235,123757,127090,126256,112562,115166,110966,117744,126723,117135,115091,121777,108050,117801,119785,120123,115876,123057,121925,121383,124253,118881,123860,119118,118085,113951,118972,119405,116957,126186,124475,132740,118775,120381,125803,128045,131458,124308,127135,129269,124987,127953,128539,123937,124718,121655,124815,118914,131189,120562,124128,133978,132005,129912,131083,119669,127377,126094,126391,139277,136552,130221,128772,133313,127433,136013,129520,134942,127067,135141,127495,130150,130256,124726,123184,129402,135970,126432,123494,124151,131186,129583,120389,123239,125501,123134,124508,128446,122059,118557,119888,122190,120823,117228,123943,131726,109820,132153,128680,115949,126034,126657,131484,118392,128773,128165,119007,130968,127388,128524,124394,119175,130883,126394,129966,121750,132150,123303,126823,128065,126711,123680,122622,124594,130005,121946,125318,130335,123992,130176,130322,122114,128680,124820,110064,124802,115674,122025,125895,128795,130611,127887,127223,131031,119408,130176,123866,130910,133568,126841,136571,125229,127108,127215,131517,129121,134580,132497,135852,117398,122551,124761,124313,129179,124528,108322,109270,128024,125082,116360,125734,132975,120639,120569,135654,127368,128557,126649,127339,128346,125438,128289,126298,133322,127784,131438,129760,128158,121493,110530,123759,121945,122186,130161],"statistics":{"average":126022.85774058578,"ips":7.9350684306689,"maximum":140034,"median":126711.0,"minimum":108050,"mode":[130176,128680],"percentiles":{"50":126711.0,"99":138747.8},"sample_size":239,"std_dev":5926.601897825388,"std_dev_ips":0.3731703316661991,"std_dev_ratio":0.04702799162057662}};
+      var runTimes     = measurements.run_times;
+      var statistics   = measurements.statistics;
+
+      var inputHeadline = " (data/puz4.txt)"
+
+      drawRawRunTimeCharts(runTimes, inputHeadline, statistics);
+      drawRunTimeHistograms(runTimes, inputHeadline);
+    </script>
+  </body>
+</html>

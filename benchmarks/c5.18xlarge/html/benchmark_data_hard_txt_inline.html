@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/hard.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.6.6</li>
+    <li>Erlang: 21.0</li>
+    <li>Operating system: Linux</li>
+    <li>Available memory: 137.48 GB</li>
+    <li>CPU Information: Intel(R) Xeon(R) Platinum 8124M CPU @ 3.00GHz</li>
+    <li>Number of Available Cores: 72</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        <a name="inline"></a>
+        inline
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#individual">
+          <i
+            class="benchee-help-icon icon-question-circle-o"
+            title="Graphs showing the individual run time distribution for inline.
+Run Times Histogram shows the distribution of occurrences of specific run times in buckets.
+Raw Run Times shows all individual recorded run times in the order they were recorded in."
+          ></i>
+        </a>
+      </h2>
+
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left">inline</td>
+        
+        <td>5.56</td>
+        <td>180.00 ms</td>
+        <td>±0.57%</td>
+        <td>179.72 ms</td>
+        <td>178.56 ms</td>
+        <td>183.99 ms</td>
+        <td>167</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="sorted-run-times" class="plot" data-job-name="inline"></div>
+      </section>
+      <section class="benchee-plot-container">
+        <div id="raw-run-times" class="plot" data-job-name="inline"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var measurements = {"run_times":[179246,179422,179937,181197,181759,179142,178561,179039,180704,180561,179612,179650,180313,179738,181206,179695,180253,179973,180144,181050,180831,179394,179712,179307,179122,182424,179842,179661,180242,179977,180386,178941,179365,180752,179609,179146,182236,179680,180611,179325,179325,178701,183988,179130,179692,179404,179848,181734,179171,180215,179085,180073,179234,182061,179755,179288,179781,179041,181977,179752,179733,179958,179310,179179,182013,179761,178906,179516,179009,182237,179404,178922,180343,179057,179143,181747,179558,178840,179746,180127,181195,179217,179884,179887,178634,179486,181895,179521,179640,179716,179959,179486,182301,179442,179980,179260,179577,181984,179179,179796,178812,178991,178842,181292,179126,179761,179131,179170,180643,179431,181558,180172,179573,179582,181750,180762,180338,178590,179631,181156,179965,179841,179323,178658,179139,181801,179543,179720,180329,179301,179931,183690,180090,179205,180109,178956,181782,180885,180451,181789,179381,178643,182585,179236,179117,179851,178627,180746,180812,179322,179681,179257,179984,181200,179908,179612,180352,179626,181686,179184,180111,180422,179332,178915,181030,178798,179627],"statistics":{"average":179996.59880239522,"ips":5.555660532773873,"maximum":183988,"median":179716.0,"minimum":178561,"mode":[179404,179486,179612,179761,179325,179179],"percentiles":{"50":179716.0,"99":183785.36},"sample_size":167,"std_dev":1034.6929412386844,"std_dev_ips":0.03193617421343731,"std_dev_ratio":0.005748402737179474}};
+      var runTimes     = measurements.run_times;
+      var statistics   = measurements.statistics;
+
+      var inputHeadline = " (data/hard.txt)"
+
+      drawRawRunTimeCharts(runTimes, inputHeadline, statistics);
+      drawRunTimeHistograms(runTimes, inputHeadline);
+    </script>
+  </body>
+</html>

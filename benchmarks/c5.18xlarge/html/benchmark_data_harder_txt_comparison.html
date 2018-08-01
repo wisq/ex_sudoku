@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/harder.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.6.6</li>
+    <li>Erlang: 21.0</li>
+    <li>Operating system: Linux</li>
+    <li>Available memory: 137.48 GB</li>
+    <li>CPU Information: Intel(R) Xeon(R) Platinum 8124M CPU @ 3.00GHz</li>
+    <li>Number of Available Cores: 72</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        Comparison
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#comparison">
+          <i
+          class="benchee-help-icon icon-question-circle-o"
+          title="Comparisons of the different benchmarking jobs.
+For Iterations per Second higher is better, the black whiskers denote standard deviation. otherwise it is runtime so lower is better.
+The Box Plot shows a distribution of run times with the median and outliers."
+          ></i>
+        </a>
+      </h2>
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_inline.html">inline</a></td>
+        
+        <td>1.52</td>
+        <td>0.66 s</td>
+        <td>±0.71%</td>
+        <td>0.66 s</td>
+        <td>0.65 s</td>
+        <td>0.67 s</td>
+        <td>46</td>
+      </tr>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_managed__10_.html">managed (10)</a></td>
+        
+        <td>0.75</td>
+        <td>1.33 s</td>
+        <td>±4.52%</td>
+        <td>1.32 s</td>
+        <td>1.23 s</td>
+        <td>1.46 s</td>
+        <td>23</td>
+      </tr>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_managed__100_.html">managed (100)</a></td>
+        
+        <td>0.84</td>
+        <td>1.19 s</td>
+        <td>±2.13%</td>
+        <td>1.18 s</td>
+        <td>1.13 s</td>
+        <td>1.24 s</td>
+        <td>26</td>
+      </tr>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_managed__1000_.html">managed (1000)</a></td>
+        
+        <td>0.84</td>
+        <td>1.19 s</td>
+        <td>±2.20%</td>
+        <td>1.19 s</td>
+        <td>1.15 s</td>
+        <td>1.24 s</td>
+        <td>26</td>
+      </tr>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_managed__10000_.html">managed (10000)</a></td>
+        
+        <td>0.82</td>
+        <td>1.21 s</td>
+        <td>±4.19%</td>
+        <td>1.19 s</td>
+        <td>1.16 s</td>
+        <td>1.38 s</td>
+        <td>25</td>
+      </tr>
+    
+      <tr>
+        
+          <td class="text-left"><a href="benchmark_data_harder_txt_ruby.html">ruby</a></td>
+        
+        <td>0.101</td>
+        <td>9.86 s</td>
+        <td>±0.29%</td>
+        <td>9.86 s</td>
+        <td>9.83 s</td>
+        <td>9.90 s</td>
+        <td>4</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="ips-comparison" class="job-count-6 plot"></div>
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="box-plot" class="job-count-6 plot"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var suite      = {"run_times":{"inline":[662544,657915,661841,657770,658673,657712,657470,656715,658173,656019,653800,659304,658431,661431,652176,650569,655829,657132,654706,662046,661505,661390,670689,656822,657983,663565,659156,654418,650534,648131,656062,655289,668096,666840,659536,658118,656504,655470,649255,656186,653372,659663,657480,656467,666774,655823],"managed (10)":[1282161,1339854,1392835,1256508,1232036,1276020,1349727,1290484,1309383,1277130,1336777,1366481,1268970,1317363,1419855,1438584,1460384,1377358,1320830,1283535,1283246,1365425,1327286],"managed (100)":[1172964,1208949,1162662,1132673,1244336,1203233,1205613,1176830,1192606,1224638,1228660,1192506,1181690,1159710,1185282,1177962,1183126,1184551,1169045,1170188,1182256,1174671,1140028,1184724,1173377,1210599],"managed (1000)":[1203954,1165831,1192993,1209359,1188553,1216734,1238049,1212137,1200776,1237847,1181235,1156098,1184113,1208494,1190088,1203162,1194038,1232116,1210350,1159893,1174555,1154700,1171002,1160067,1170432,1242795],"managed (10000)":[1230172,1251811,1225034,1317467,1384942,1269293,1223575,1171412,1195687,1208502,1191033,1189084,1181307,1202586,1177401,1160521,1182117,1179035,1192139,1171298,1226270,1191796,1192987,1165366,1236118],"ruby":[9898053,9848371,9875656,9832745]},"sort_order":["inline","managed (100)","managed (1000)","managed (10000)","managed (10)","ruby"],"statistics":{"inline":{"average":657943.1304347826,"ips":1.5198881996673164,"maximum":670689,"median":657596.0,"minimum":648131,"mode":null,"percentiles":{"50":657596.0,"99":670689.0},"sample_size":46,"std_dev":4642.302965883759,"std_dev_ips":0.010723999036914787,"std_dev_ratio":0.007055781497127309},"managed (10)":{"average":1329227.4782608696,"ips":0.752316677434608,"maximum":1460384,"median":1320830.0,"minimum":1232036,"mode":null,"percentiles":{"50":1320830.0,"99":1460384.0},"sample_size":23,"std_dev":60099.40475871436,"std_dev_ips":0.034015084132198586,"std_dev_ratio":0.04521378450387365},"managed (100)":{"average":1185495.3461538462,"ips":0.8435292498147237,"maximum":1244336,"median":1182691.0,"minimum":1132673,"mode":null,"percentiles":{"50":1182691.0,"99":1244336.0},"sample_size":26,"std_dev":25290.748472818763,"std_dev_ips":0.017995419514503223,"std_dev_ratio":0.021333486086529678},"managed (1000)":{"average":1194591.1923076923,"ips":0.8371064565344869,"maximum":1242795,"median":1193515.5,"minimum":1154700,"mode":null,"percentiles":{"50":1193515.5,"99":1242795.0},"sample_size":26,"std_dev":26331.7476427513,"std_dev_ips":0.01845189894712229,"std_dev_ratio":0.022042475963583868},"managed (10000)":{"average":1212678.12,"ips":0.8246211286470642,"maximum":1384942,"median":1192987.0,"minimum":1160521,"mode":null,"percentiles":{"50":1192987.0,"99":1384942.0},"sample_size":25,"std_dev":50847.446499570324,"std_dev_ips":0.034576263915190364,"std_dev_ratio":0.041929878721296894},"ruby":{"average":9863706.25,"ips":0.10138177016372522,"maximum":9898053,"median":9862013.5,"minimum":9832745,"mode":null,"percentiles":{"50":9862013.5,"99":9898053.0},"sample_size":4,"std_dev":28961.265250618224,"std_dev_ips":2.976715103705424e-4,"std_dev_ratio":0.0029361443372888586}}};
+      var runTimes   = suite.run_times;
+      var statistics = suite.statistics;
+      var sortOrder  = suite.sort_order;
+
+      var inputHeadline = " (data/harder.txt)"
+
+      drawIpsComparisonChart(statistics, sortOrder, inputHeadline);
+      drawComparisonBoxPlot(runTimes, sortOrder, inputHeadline);
+    </script>
+  </body>
+</html>
