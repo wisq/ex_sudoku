@@ -1,6 +1,4 @@
-# Split into multiple modules for maximum concurrency.
-
-defmodule Sudoku.Solver.InlineTest.Easy do
+defmodule Sudoku.Solver.InlineTest do
   use ExUnit.Case, async: true
   alias Sudoku.Puzzle
   alias Sudoku.Solver
@@ -72,12 +70,6 @@ defmodule Sudoku.Solver.InlineTest.Easy do
              [6, 4, 1, 2, 7, 5, 9, 8, 3]
            ]
   end
-end
-
-defmodule Sudoku.Solver.InlineTest.Medium do
-  use ExUnit.Case, async: true
-  alias Sudoku.Puzzle
-  alias Sudoku.Solver
 
   test "puz4" do
     assert {[solution], stats} = Puzzle.read("data/puz4.txt") |> Solver.solve_inline()
@@ -112,12 +104,6 @@ defmodule Sudoku.Solver.InlineTest.Medium do
              [1, 6, 8, 3, 4, 7, 5, 9, 2]
            ]
   end
-end
-
-defmodule Sudoku.Solver.InlineTest.Hard do
-  use ExUnit.Case, async: true
-  alias Sudoku.Puzzle
-  alias Sudoku.Solver
 
   test "hard" do
     assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve_inline()
