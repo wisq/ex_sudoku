@@ -1,5 +1,7 @@
-defmodule Sudoku.SolverTest do
-  use ExUnit.Case
+# Split into multiple modules for maximum concurrency.
+
+defmodule Sudoku.SolverTest.Easy do
+  use ExUnit.Case, async: true
   alias Sudoku.Puzzle
   alias Sudoku.Solver
 
@@ -74,6 +76,12 @@ defmodule Sudoku.SolverTest do
              [6, 4, 1, 2, 7, 5, 9, 8, 3]
            ]
   end
+end
+
+defmodule Sudoku.SolverTest.Medium do
+  use ExUnit.Case, async: true
+  alias Sudoku.Puzzle
+  alias Sudoku.Solver
 
   test "puz4" do
     assert {[solution], stats} = Puzzle.read("data/puz4.txt") |> Solver.solve()
@@ -110,6 +118,12 @@ defmodule Sudoku.SolverTest do
              [1, 6, 8, 3, 4, 7, 5, 9, 2]
            ]
   end
+end
+
+defmodule Sudoku.SolverTest.Hard do
+  use ExUnit.Case, async: true
+  alias Sudoku.Puzzle
+  alias Sudoku.Solver
 
   test "hard" do
     assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve()
@@ -128,6 +142,12 @@ defmodule Sudoku.SolverTest do
              [7, 9, 6, 3, 1, 8, 4, 5, 2]
            ]
   end
+end
+
+defmodule Sudoku.SolverTest.Hard.Max do
+  use ExUnit.Case, async: true
+  alias Sudoku.Puzzle
+  alias Sudoku.Solver
 
   test "hard with max_children: 20" do
     assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve(max_children: 20)
