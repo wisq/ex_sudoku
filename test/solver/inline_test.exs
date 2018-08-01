@@ -6,7 +6,8 @@ defmodule Sudoku.Solver.InlineTest.Easy do
   alias Sudoku.Solver
 
   test "easy" do
-    assert [solution] = Puzzle.read("data/easy.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/easy.txt") |> Solver.solve_inline()
+    assert stats.launched == 1
 
     assert solution == [
              [5, 2, 8, 6, 4, 7, 1, 9, 3],
@@ -22,7 +23,8 @@ defmodule Sudoku.Solver.InlineTest.Easy do
   end
 
   test "puz1" do
-    assert [solution] = Puzzle.read("data/puz1.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/puz1.txt") |> Solver.solve_inline()
+    assert stats.launched == 2
 
     assert solution == [
              [7, 9, 6, 8, 5, 4, 3, 2, 1],
@@ -38,7 +40,8 @@ defmodule Sudoku.Solver.InlineTest.Easy do
   end
 
   test "puz2" do
-    assert [solution] = Puzzle.read("data/puz2.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/puz2.txt") |> Solver.solve_inline()
+    assert stats.launched == 32
 
     assert solution == [
              [7, 9, 2, 8, 3, 5, 4, 6, 1],
@@ -54,7 +57,8 @@ defmodule Sudoku.Solver.InlineTest.Easy do
   end
 
   test "puz3" do
-    assert [solution] = Puzzle.read("data/puz3.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/puz3.txt") |> Solver.solve_inline()
+    assert stats.launched == 4
 
     assert solution == [
              [5, 1, 9, 7, 4, 8, 6, 3, 2],
@@ -76,7 +80,8 @@ defmodule Sudoku.Solver.InlineTest.Medium do
   alias Sudoku.Solver
 
   test "puz4" do
-    assert [solution] = Puzzle.read("data/puz4.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/puz4.txt") |> Solver.solve_inline()
+    assert stats.launched == 926
 
     assert solution == [
              [7, 8, 2, 4, 5, 3, 6, 1, 9],
@@ -92,7 +97,8 @@ defmodule Sudoku.Solver.InlineTest.Medium do
   end
 
   test "puz5" do
-    assert [solution] = Puzzle.read("data/puz5.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/puz5.txt") |> Solver.solve_inline()
+    assert stats.launched == 736
 
     assert solution == [
              [3, 1, 7, 6, 8, 4, 9, 2, 5],
@@ -114,7 +120,8 @@ defmodule Sudoku.Solver.InlineTest.Hard do
   alias Sudoku.Solver
 
   test "hard" do
-    assert [solution] = Puzzle.read("data/hard.txt") |> Solver.solve_inline()
+    assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve_inline()
+    assert stats.launched == 1800
 
     assert solution == [
              [8, 1, 2, 7, 5, 3, 6, 4, 9],

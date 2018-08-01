@@ -17,7 +17,7 @@ defmodule Mix.Tasks.Solve do
       {micros, {solutions, stats}} =
         :timer.tc(fn ->
           if opts[:inline] do
-            {Sudoku.Solver.solve_inline(puzzle), %{}}
+            Sudoku.Solver.solve_inline(puzzle)
           else
             Sudoku.Solver.solve(puzzle)
           end

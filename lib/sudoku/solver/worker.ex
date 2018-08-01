@@ -28,19 +28,45 @@ defmodule Sudoku.Solver.Worker do
   def solve_inline(puzzle) do
     case solve_once(puzzle) do
       {:ok, ^puzzle} ->
-        [puzzle]
+        {[puzzle], 1, count_active_tasks()}
 
       {:pending, [one]} ->
         solve_inline(one)
 
-      {:pending, many} ->
-        many
-        |> Task.async_stream(&solve_inline/1)
-        |> Enum.map(fn {:ok, solutions} -> solutions end)
-        |> Enum.concat()
+      {:pending, [next | others]} ->
+        tasks = Enum.map(others, &Task.async(fn -> solve_inline(&1) end))
+
+        [solve_inline(next) | Enum.map(tasks, &Task.await/1)]
+        |> Enum.reduce(&combine_inline_results/2)
 
       {:error, _err} ->
-        []
+        {[], 1, maybe_count_active_tasks()}
+    end
+  end
+
+  defp combine_inline_results(stat1, stat2) do
+    {solu1, launched1, active1} = stat1
+    {solu2, launched2, active2} = stat2
+
+    {solu1 ++ solu2, launched1 + launched2, max(active1, active2)}
+  end
+
+  defp count_active_tasks() do
+    my_leader = Process.group_leader()
+
+    Process.list()
+    |> Enum.filter(fn pid ->
+      Process.info(pid)[:group_leader] == my_leader
+    end)
+    |> Enum.count()
+  end
+
+  defp maybe_count_active_tasks() do
+    # Sample process counts 1% of the time.
+    if :rand.uniform() < 0.01 do
+      count_active_tasks()
+    else
+      -1
     end
   end
 

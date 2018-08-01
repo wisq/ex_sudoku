@@ -12,6 +12,8 @@ defmodule Sudoku.Solver do
   end
 
   def solve_inline(puzzle) do
-    Worker.solve_inline(puzzle)
+    {solutions, launched, max_active} = Worker.solve_inline(puzzle)
+
+    {solutions, %{launched: launched, max_active: max_active}}
   end
 end
