@@ -5,12 +5,14 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
 
   @switches [
     warmup: :float,
-    time: :float
+    time: :float,
+    max_children: :string
   ]
 
   @defaults [
     warmup: 2.0,
-    time: 10.0
+    time: 10.0,
+    max_children: "10,100,1000,10000"
   ]
 
   def run(args) do
@@ -21,12 +23,19 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
       Keyword.merge(@defaults, opts)
       |> Keyword.put(:inputs, Enum.map(files, &make_input/1))
 
+    {max_children, opts} = Keyword.pop(opts, :max_children)
+    max_children = String.split(max_children, ",") |> Enum.map(&String.to_integer/1)
+
     Benchee.run(
       [
         {"ruby", fn {_, ruby} -> ruby_solve(ruby) end},
         {"inline", fn {puzzle, _} -> Sudoku.Solver.solve_inline(puzzle) end},
-        {"managed", fn {puzzle, _} -> Sudoku.Solver.solve(puzzle) end}
-      ],
+        Enum.map(max_children, fn max ->
+          {"managed (#{max})",
+           fn {puzzle, _} -> Sudoku.Solver.solve(puzzle, max_children: max) end}
+        end)
+      ]
+      |> List.flatten(),
       opts
     )
   end
