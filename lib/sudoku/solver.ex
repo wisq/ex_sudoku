@@ -12,7 +12,13 @@ defmodule Sudoku.Solver do
   end
 
   def solve_inline(puzzle) do
-    {solutions, launched, max_active} = Worker.solve_inline(puzzle)
+    {solutions, launched, max_active} =
+      Task.async(fn ->
+        # Make myself the leader, for `max_active` purposes:
+        Process.group_leader(self(), self())
+        Worker.solve_inline(puzzle)
+      end)
+      |> Task.await(30_000)
 
     {solutions, %{launched: launched, max_active: max_active}}
   end
