@@ -26,12 +26,12 @@ defmodule Sudoku.Solver.Manager do
   end
 
   def queue(pid, puzzle) do
-    GenServer.call(pid, {:queue, puzzle})
+    GenServer.cast(pid, {:queue, puzzle})
   end
 
   def solved(pid, puzzle) do
     Verify.verify(puzzle)
-    GenServer.call(pid, {:solved, puzzle})
+    GenServer.cast(pid, {:solved, puzzle})
   end
 
   def await(pid) do
@@ -62,18 +62,18 @@ defmodule Sudoku.Solver.Manager do
   end
 
   @impl true
-  def handle_call({:queue, puzzle}, _from, state) do
+  def handle_cast({:queue, puzzle}, state) do
     queue = :queue.in(puzzle, state.queue)
     state = %State{state | queue: queue}
     state = launch_queued(state)
 
-    {:reply, :ok, state}
+    {:noreply, state}
   end
 
   @impl true
-  def handle_call({:solved, puzzle}, _from, state) do
+  def handle_cast({:solved, puzzle}, state) do
     state = %State{state | solutions: [puzzle | state.solutions]}
-    {:reply, :ok, state}
+    {:noreply, state}
   end
 
   @impl true
