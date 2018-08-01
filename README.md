@@ -54,12 +54,30 @@ Given that 4-core CPUs saw a ~6x increase in speed from Ruby to Elixir, it's not
 
 Startup times are similar to the 2013 CPU: ~490ms for Elixir, ~150ms for Ruby.
 
+### Amazon 72-vCPU instance (Linux)
+
+On a highly multi-core (c5.18xlarge) Amazon EC2 instance, Ruby results average to 2.7s each — better than the 2011 and 2013 CPUs, but worse than the 2015 CPU.  Elixir results average to 275ms clock time, 3.8s CPU time — the best results so far.
+
+Again, this is a roughly 10x improvement, suggesting that more cores do indeed help, but that this solution does begin to max out at around 10x performance — either due to the nature of the algorithm, or due to overhead and/or bottlenecking.
+
+### Platinum Blonde
+
+To push the 72-vCPU instance further, I found a harder puzzle — the (apparently well-known) "Platinum Blonde" puzzle — stored here as `data/harder.txt`.
+
+Initially — with the original setting of 10k maximum workers for Elixir — the Ruby version took 9.9 seconds to solve this, while the Elixir version took 3.0 seconds.  This seemed to show a substantially reduced benefit to the concurrent Elixir version — as well as reversing the "more cores is better" trend, since the 4-core 2015 CPU solves this puzzle in only 7.9 seconds in Ruby, and 2.85 seconds in Elixir.
+
+However, this seems to be a case of too many children causing too much overhead and/or bottlenecking — with a `max_active` figure of over 2500.  Reducing the maximum children to only 100 was a substantial improvement, coming in at 1.1s average in Elixir on the 72-core instance — a 9x improvement over the Ruby version — and 1.45s on the 4-core 2015 CPU.  Neither CPU saw any major improvement when reducing the child count below this amount.
+
 ## Conclusion
 
 All in all, a decently successful approach.
 
 Of course, the problem is not especially difficult, even with the hardest puzzles I can find, but this is a satisfactory solution, if perhaps somewhat over-engineered.
 
-In general, maximum concurrency is actually pretty low.  In the original fully-asynchronous version, it was rare to see `max_active` higher than 15 to 20 processes at a time, unless the CPU was tied up with something else.  The new version (using `call` instead of `cast`) bumps this to ~250 processes — but most of that is just because of the increased coordination overhead, and the increased bottlenecking on the `Sudoku.Solver.Manager` process.
+In the early tests, it seemed that maximum concurrency was generally actually pretty low.  In the original fully-asynchronous version, it was rare to see `max_active` higher than 15 to 20 processes at a time, unless the CPU was tied up with something else.  The new version (using `call` instead of `cast`) bumps this to ~250 processes — but most of that is just because of the increased coordination overhead, and the increased bottlenecking on the `Sudoku.Solver.Manager` process.
 
-As such, this could also probably have been done in a much less controlled manner, just using `spawn_link` (or `Task.async`) calls to try out every possibility (in something of a "fork bomb" style).  But this was also a good chance to try out the new `DynamicSupervisor` module, even if it's just a rework of the old `simple_one_for_one` Supervisor behaviour.
+However, the "Platinum Blonde" test turned this upside-down.  With process counts upwards of 2500, there was just too much overhead, and the concurrency benefits began to disappear.  In this case, limiting the number of children to a more reasonable number (100) was essential for maximum performance.  That might be because of Erlang scheduler overhead, but it seems far more likely to me that the `Manager` process is just too much of a bottleneck when using synchronous `GenServer.call` calls.  (It's probably worth finding a way to safely return this to `GenServer.cast` and solving the race condition that entailed.)
+
+It might also be worth trying out a much less controlled approach — just using `spawn_link` (or `Task.async`) calls to try out every possibility (in something of a "fork bomb" style), without attempting to put any limits on the number of processes.  It's possible that maximum concurrency would be low enough, and/or the lack of single-process bottlenecking would speed things up enough, that controlling the number of workers isn't necessary.
+
+In any case, this was also a good chance to try out the new `DynamicSupervisor` module (even if it's just a rework of the old `simple_one_for_one` Supervisor behaviour).

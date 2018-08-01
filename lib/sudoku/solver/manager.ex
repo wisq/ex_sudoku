@@ -6,8 +6,9 @@ defmodule Sudoku.Solver.Manager do
   # Print a dot every 100th worker we launch.
   @status_every 100
 
-  # Launch up to 10k workers at once.
-  @default_max_workers 10000
+  # Launch up to 100 workers at once.
+  # More than this tends to be diminishing returns, or even make things worse.
+  @default_max_workers 100
 
   defmodule State do
     @enforce_keys [:supervisor]
