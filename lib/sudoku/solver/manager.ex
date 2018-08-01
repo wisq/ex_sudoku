@@ -7,7 +7,7 @@ defmodule Sudoku.Solver.Manager do
   @status_every 100
 
   # Launch up to 10k workers at once.
-  @max_workers 10000
+  @default_max_workers 10000
 
   defmodule State do
     @enforce_keys [:supervisor]
@@ -21,8 +21,8 @@ defmodule Sudoku.Solver.Manager do
     )
   end
 
-  def start_link do
-    GenServer.start_link(__MODULE__, nil)
+  def start_link(opts \\ []) do
+    GenServer.start_link(__MODULE__, opts)
   end
 
   def queue(pid, puzzle) do
@@ -43,11 +43,11 @@ defmodule Sudoku.Solver.Manager do
   end
 
   @impl true
-  def init(nil) do
+  def init(opts) do
     {:ok, supervisor} =
       DynamicSupervisor.start_link(
         strategy: :one_for_one,
-        max_children: @max_workers
+        max_children: Keyword.get(opts, :max_children, @default_max_workers)
       )
 
     {:ok, %State{supervisor: supervisor}}
