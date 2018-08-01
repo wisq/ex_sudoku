@@ -100,28 +100,37 @@ class Board
   end
 end
 
-queue = [Board.from_file(ARGV.first)]
-solved = []
+def solve_file(file)
+  puts "Solving: #{file}"
+  queue = [Board.from_file(file)]
+  solved = []
 
-start = Time.now
+  start = Time.now
 
-until queue.empty?
-  board = queue.shift
-  begin
-    queue += (nxt = board.next_boards)
-    puts "#{nxt.count} possible upcoming boards" if DEBUG
-  rescue Board::Impossible
-    # nothing added to queue
-    puts "board impossible, tossing" if DEBUG
-  rescue Board::Solved
-    solved << board
+  until queue.empty?
+    board = queue.shift
+    begin
+      queue += (nxt = board.next_boards)
+      puts "#{nxt.count} possible upcoming boards" if DEBUG
+    rescue Board::Impossible
+      # nothing added to queue
+      puts "board impossible, tossing" if DEBUG
+    rescue Board::Solved
+      solved << board
+    end
   end
+
+  duration = "%.2f" % [(Time.now - start) * 1000]
+
+  puts "#{solved.count} solutions in #{duration} ms:"
+  solved.each do |board|
+    puts
+    puts board.to_string
+  end
+
+  puts
 end
 
-duration = "%.2f" % [(Time.now - start) * 1000]
-
-puts "#{solved.count} solutions in #{duration} ms:"
-solved.each do |board|
-  puts
-  puts board.to_string
+ARGV.each do |file|
+  solve_file(file)
 end
