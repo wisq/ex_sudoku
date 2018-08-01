@@ -6,13 +6,15 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
   @switches [
     warmup: :float,
     time: :float,
-    max_children: :string
+    max_children: :string,
+    html: :string
   ]
 
   @defaults [
     warmup: 2.0,
     time: 10.0,
-    max_children: "10,100,1000,10000"
+    max_children: "10,100,1000,10000",
+    html: nil
   ]
 
   def run(args) do
@@ -31,6 +33,8 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
 
     {max_children, opts} = Keyword.pop(opts, :max_children)
     max_children = String.split(max_children, ",") |> Enum.map(&String.to_integer/1)
+
+    opts = add_formatters(opts)
 
     Benchee.run(
       [
@@ -69,6 +73,18 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
   defp git_head() do
     {output, 0} = System.cmd("git", ["rev-parse", "HEAD"])
     String.trim(output)
+  end
+
+  defp add_formatters(opts) do
+    case Keyword.pop(opts, :html) do
+      {nil, opts} ->
+        opts
+
+      {file, opts} ->
+        opts
+        |> Keyword.put(:formatters, [Benchee.Formatters.HTML, Benchee.Formatters.Console])
+        |> Keyword.put(:formatter_options, html: [file: file])
+    end
   end
 end
 
