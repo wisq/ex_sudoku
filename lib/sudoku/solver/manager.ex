@@ -35,7 +35,7 @@ defmodule Sudoku.Solver.Manager do
   end
 
   def await(pid) do
-    {_solutions, _max_active} = GenServer.call(pid, :wait)
+    {_solutions, _max_active} = GenServer.call(pid, :wait, 30_000)
   end
 
   def stop(pid) do
