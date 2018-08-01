@@ -16,8 +16,8 @@ The approach is as follows:
   * For the first possible value, set the cell to that value, and solve again.
   * For other possible values (if any), launch a new solver worker with the cell set to that value.
 * Once all workers have exited, return a list of solutions, along with some extra stats:
-  * `launched`: The number of solver workers launched.  Larger values indicate more complex puzzles with more backtracking.
-  * `max_active`: The highest number of active workers seen at one time.  Larger values indicate more concurrency.
+  * `launched` (deterministic): The number of solver workers launched.  Larger values indicate more complex puzzles with more backtracking.
+  * `max_active` (nondeterministic): The highest number of active workers seen at one time.  Larger values indicate more concurrency.
 
 Most of the complexity is in the `Sudoku.Solver.Manager` module that launches and keeps track of the workers.
 
