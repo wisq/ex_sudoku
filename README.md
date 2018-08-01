@@ -32,11 +32,27 @@ There are no dependencies, so no `mix deps.get` is required.
 
 ## Results
 
-On my 2013 Macbook Pro, the Ruby version (`other/sudoku.rb`) can solve the hardest puzzle (`data/hard.txt`) in between 4.3 and 4.5 seconds (both CPU and clock time), using 99% CPU (i.e. a single core).
+### 2013 laptop 4-core CPU (Mac)
 
-The Elixir version tends to take about 4.7 seconds of CPU time.  However, it also uses around 475% CPU, meaning it solves the hardest puzzle in only 1.0 seconds of clock time.
+On my 2013 Macbook Pro, the Ruby version (`other/sudoku.rb`) can solve the hardest puzzle (`data/hard.txt`) in 4.0 seconds at best, using 99% CPU (i.e. a single core).
 
-Results on a more modern CPU (an 8-core i7-6700K) are similar: In Ruby, ~2.5 seconds; in Elixir, 2.9 CPU seconds, but only 0.5 clock seconds.  CPU is over 500% and `max_active` can reach upwards of 30 on some runs.
+The Elixir version tends to take about 4.5 seconds of CPU time.  However, it also uses around 700% CPU, meaning it solves the hardest puzzle in only ~650ms of clock time.
+
+There is, however, a one-time ~400ms Elixir/Erlang startup time cost, compared to a much more modest ~150ms Ruby startup time cost.  This makes single-puzzle `mix solve` calls much less performant than `ruby other/sudoku.rb` calls.
+
+### 2015 desktop 4-core CPU (Linux)
+
+On a more modern CPU (a 4-core, 8-thread i7-6700K), the results are similar: In Ruby, ~2.45 seconds; in Elixir, ~2.7 CPU seconds, but only ~400ms on the clock.  CPU is over 650% and `max_active` is typically around 250.
+
+Startup costs are reduced, with Elixir having ~200ms startup time and Ruby having ~40ms.  (Given that Elixir's startup time is halved while Ruby's is reduced by more than two thirds, this suggests that Elixir/Erlang's startup time is more about scheduling than about raw computation.)
+
+### 2011 desktop 6-core CPU (Windows)
+
+Going back to an even older CPU (a 6-core, 12-thread i7-3930k), the results are even more divergent.  Ruby takes over 3.9 seconds to solve the `hard.txt` puzzle, while Elixir can complete it in 390ms — exactly 10x faster.  (CPU time for Elixir is not measurable on Windows for some reason.)
+
+Given that 4-core CPUs saw a ~6x increase in speed from Ruby to Elixir, it's not totally unexpected that a 6-core CPU would see a 10x increase in speed.  There may also be differences related to the Windows builds of Elixir and Ruby.
+
+Startup times are similar to the 2013 CPU: ~490ms for Elixir, ~150ms for Ruby.
 
 ## Conclusion
 
@@ -44,4 +60,6 @@ All in all, a decently successful approach.
 
 Of course, the problem is not especially difficult, even with the hardest puzzles I can find, but this is a satisfactory solution, if perhaps somewhat over-engineered.
 
-Given the relatively low maximum concurrency seen so far (`max_active` no higher than about 15 at most), it could also probably have been done in a much less controlled manner, just using `spawn_link` or `Task.async` calls to try out every possibility (in something of a "fork bomb" style).  But this was also a good chance to try out the new `DynamicSupervisor` module, even if it's just a rework of the old `simple_one_for_one` Supervisor behaviour.
+In general, maximum concurrency is actually pretty low.  In the original fully-asynchronous version, it was rare to see `max_active` higher than 15 to 20 processes at a time, unless the CPU was tied up with something else.  The new version (using `call` instead of `cast`) bumps this to ~250 processes — but most of that is just because of the increased coordination overhead, and the increased bottlenecking on the `Sudoku.Solver.Manager` process.
+
+As such, this could also probably have been done in a much less controlled manner, just using `spawn_link` (or `Task.async`) calls to try out every possibility (in something of a "fork bomb" style).  But this was also a good chance to try out the new `DynamicSupervisor` module, even if it's just a rework of the old `simple_one_for_one` Supervisor behaviour.
