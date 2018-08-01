@@ -18,10 +18,16 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
   def run(args) do
     {opts, files} = OptionParser.parse!(args, strict: @switches)
     files = Enum.uniq(files)
+    ruby = which_ruby()
+
+    IO.puts("")
+    IO.puts("Git commit: #{git_head()}")
+    IO.puts("Ruby version: #{ruby_version(ruby)}")
+    IO.puts("")
 
     opts =
       Keyword.merge(@defaults, opts)
-      |> Keyword.put(:inputs, Enum.map(files, &make_input/1))
+      |> Keyword.put(:inputs, Enum.map(files, &make_input(ruby, &1)))
 
     {max_children, opts} = Keyword.pop(opts, :max_children)
     max_children = String.split(max_children, ",") |> Enum.map(&String.to_integer/1)
@@ -40,14 +46,29 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
     )
   end
 
-  defp make_input(file) do
+  defp make_input(ruby, file) do
     puzzle = Sudoku.Puzzle.read(file)
-    ruby = RubySolver.launch(file)
+    ruby = RubySolver.launch(ruby, file)
     {file, {puzzle, ruby}}
   end
 
   defp ruby_solve(ruby) do
     RubySolver.run(ruby)
+  end
+
+  defp which_ruby() do
+    {ruby, 0} = System.cmd("which", ["ruby"])
+    String.trim(ruby)
+  end
+
+  defp ruby_version(ruby) do
+    {output, 0} = System.cmd(ruby, ["--version"])
+    String.trim(output)
+  end
+
+  defp git_head() do
+    {output, 0} = System.cmd("git", ["rev-parse", "HEAD"])
+    String.trim(output)
   end
 end
 
@@ -63,16 +84,10 @@ defmodule RubySolver do
     )
   end
 
-  def launch(file) do
-    ruby = which_ruby()
+  def launch(ruby, file) do
     {:ok, pid} = GenServer.start_link(__MODULE__, {ruby, file})
     :pong = GenServer.call(pid, :ping)
     pid
-  end
-
-  defp which_ruby() do
-    {ruby, 0} = System.cmd("which", ["ruby"])
-    String.trim(ruby)
   end
 
   def run(pid) do
