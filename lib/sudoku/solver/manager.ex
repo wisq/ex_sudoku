@@ -18,6 +18,7 @@ defmodule Sudoku.Solver.Manager do
       queue: :queue.new(),
       solutions: [],
       launched: 0,
+      reaped: 0,
       max_active: 0
     )
   end
@@ -27,12 +28,12 @@ defmodule Sudoku.Solver.Manager do
   end
 
   def queue(pid, puzzle) do
-    GenServer.call(pid, {:queue, puzzle})
+    GenServer.cast(pid, {:queue, puzzle})
   end
 
   def solved(pid, puzzle) do
     Verify.verify(puzzle)
-    GenServer.call(pid, {:solved, puzzle})
+    GenServer.cast(pid, {:solved, puzzle})
   end
 
   def await(pid) do
@@ -54,36 +55,36 @@ defmodule Sudoku.Solver.Manager do
     {:ok, %State{supervisor: supervisor}}
   end
 
-  defp workers_running?(supervisor) do
-    count_active_workers(supervisor) > 0
-  end
-
   defp count_active_workers(supervisor) do
     DynamicSupervisor.count_children(supervisor).active
   end
 
   @impl true
-  def handle_call({:queue, puzzle}, _from, state) do
+  def handle_cast({:queue, puzzle}, state) do
     queue = :queue.in(puzzle, state.queue)
     state = %State{state | queue: queue}
     state = launch_queued(state)
 
-    {:reply, :ok, state}
+    {:noreply, state}
   end
 
   @impl true
-  def handle_call({:solved, puzzle}, _from, state) do
+  def handle_cast({:solved, puzzle}, state) do
     state = %State{state | solutions: [puzzle | state.solutions]}
-    {:reply, :ok, state}
+    {:noreply, state}
   end
 
   @impl true
   def handle_call(:wait, from, state) do
-    if workers_running?(state.supervisor) do
-      {:noreply, %State{state | waiting: [from | state.waiting]}}
-    else
+    if all_workers_complete?(state) do
       {:reply, wait_reply(state)}
+    else
+      {:noreply, %State{state | waiting: [from | state.waiting]}}
     end
+  end
+
+  defp all_workers_complete?(state) do
+    state.reaped >= state.launched && :queue.is_empty(state.queue)
   end
 
   defp wait_reply(state) do
@@ -96,16 +97,18 @@ defmodule Sudoku.Solver.Manager do
 
   @impl true
   def handle_info({:DOWN, _ref, :process, _pid, _reason}, state) do
-    state = launch_queued(state)
+    state =
+      %State{state | reaped: state.reaped + 1}
+      |> launch_queued()
 
-    if workers_running?(state.supervisor) do
-      {:noreply, state}
-    else
+    if all_workers_complete?(state) do
       Enum.each(state.waiting, fn from ->
         GenServer.reply(from, wait_reply(state))
       end)
 
       {:noreply, %State{state | waiting: []}}
+    else
+      {:noreply, state}
     end
   end
 

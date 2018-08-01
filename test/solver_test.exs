@@ -86,7 +86,7 @@ defmodule Sudoku.SolverTest.Medium do
   test "puz4" do
     assert {[solution], stats} = Puzzle.read("data/puz4.txt") |> Solver.solve()
     assert stats.launched == 926
-    assert stats.max_active > 30
+    assert stats.max_active > 5
 
     assert solution == [
              [7, 8, 2, 4, 5, 3, 6, 1, 9],
@@ -104,7 +104,7 @@ defmodule Sudoku.SolverTest.Medium do
   test "puz5" do
     assert {[solution], stats} = Puzzle.read("data/puz5.txt") |> Solver.solve()
     assert stats.launched == 736
-    assert stats.max_active > 50
+    assert stats.max_active > 5
 
     assert solution == [
              [3, 1, 7, 6, 8, 4, 9, 2, 5],
@@ -128,7 +128,7 @@ defmodule Sudoku.SolverTest.Hard do
   test "hard" do
     assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve()
     assert stats.launched == 1800
-    assert stats.max_active > 50
+    assert stats.max_active >= 10
 
     assert solution == [
              [8, 1, 2, 7, 5, 3, 6, 4, 9],
@@ -149,10 +149,10 @@ defmodule Sudoku.SolverTest.Hard.Max do
   alias Sudoku.Puzzle
   alias Sudoku.Solver
 
-  test "hard with max_children: 20" do
-    assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve(max_children: 20)
+  test "hard with max_children: 5" do
+    assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve(max_children: 5)
     assert stats.launched == 1800
-    assert stats.max_active == 20
+    assert stats.max_active == 5
 
     assert solution == [
              [8, 1, 2, 7, 5, 3, 6, 4, 9],
