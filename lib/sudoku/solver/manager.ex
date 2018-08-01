@@ -9,6 +9,14 @@ defmodule Sudoku.Solver.Manager do
   # Launch up to 10k workers at once.
   @max_workers 10000
 
+  # Sometimes we can have race conditions where
+  # there appear to be no more workers running,
+  # but there are still messages in our queue
+  # to launch more workers.  To avoid this,
+  # require the Manager to send three consecutive
+  # messages to itself to confirm.
+  @done_confirmations 3
+
   defmodule State do
     @enforce_keys [:supervisor]
     defstruct(
@@ -17,7 +25,8 @@ defmodule Sudoku.Solver.Manager do
       queue: :queue.new(),
       solutions: [],
       launched: 0,
-      max_active: 0
+      max_active: 0,
+      done_counter: 0
     )
   end
 
@@ -77,12 +86,43 @@ defmodule Sudoku.Solver.Manager do
   end
 
   @impl true
+  def handle_cast(:done, state) do
+    {:noreply, check_workers_running(state, true)}
+  end
+
+  @impl true
   def handle_call(:wait, from, state) do
-    if workers_running?(state.supervisor) do
-      {:noreply, %State{state | waiting: [from | state.waiting]}}
-    else
-      {:reply, wait_reply(state)}
+    state =
+      %State{state | waiting: [from | state.waiting]}
+      |> check_workers_running(false)
+
+    {:noreply, state}
+  end
+
+  defp check_workers_running(state, do_increment) do
+    cond do
+      workers_running?(state.supervisor) ->
+        %State{state | done_counter: 0}
+
+      state.done_counter >= @done_confirmations ->
+        dispatch_wait_replies(state)
+
+      do_increment ->
+        GenServer.cast(self(), :done)
+        IO.inspect(state.done_counter)
+        %State{state | done_counter: state.done_counter + 1}
+
+      true ->
+        state
     end
+  end
+
+  defp dispatch_wait_replies(state) do
+    Enum.each(state.waiting, fn from ->
+      GenServer.reply(from, wait_reply(state))
+    end)
+
+    %State{state | waiting: []}
   end
 
   defp wait_reply(state) do
@@ -95,17 +135,12 @@ defmodule Sudoku.Solver.Manager do
 
   @impl true
   def handle_info({:DOWN, _ref, :process, _pid, _reason}, state) do
-    state = launch_queued(state)
+    state =
+      state
+      |> launch_queued()
+      |> check_workers_running(true)
 
-    if workers_running?(state.supervisor) do
-      {:noreply, state}
-    else
-      Enum.each(state.waiting, fn from ->
-        GenServer.reply(from, wait_reply(state))
-      end)
-
-      {:noreply, %State{state | waiting: []}}
-    end
+    {:noreply, state}
   end
 
   defp launch_queued(state) do
