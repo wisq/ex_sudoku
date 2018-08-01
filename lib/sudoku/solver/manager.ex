@@ -3,9 +3,6 @@ defmodule Sudoku.Solver.Manager do
   alias Sudoku.Puzzle.Verify
   alias Sudoku.Solver.Worker
 
-  # Print a dot every 100th worker we launch.
-  @status_every 100
-
   # Launch up to 100 workers at once.
   # More than this tends to be diminishing returns, or even make things worse.
   @default_max_workers 100
@@ -125,10 +122,6 @@ defmodule Sudoku.Solver.Manager do
                 max_active: max(state.max_active, count_active_workers(state.supervisor)),
                 launched: state.launched + 1
             }
-
-            if rem(state.launched, @status_every) == 0 do
-              IO.write(".")
-            end
 
             launch_queued(state)
 

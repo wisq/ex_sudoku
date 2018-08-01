@@ -11,7 +11,7 @@ defmodule Mix.Tasks.Sudoku.Solve do
     {opts, files} = OptionParser.parse!(args, strict: @switches)
 
     Enum.each(files, fn file ->
-      IO.write("Solving: #{file} ")
+      IO.write("Solving: #{file} ...")
       puzzle = Sudoku.Puzzle.read(file)
 
       {micros, {solutions, stats}} =
