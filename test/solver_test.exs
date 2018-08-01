@@ -128,7 +128,7 @@ defmodule Sudoku.SolverTest.Hard do
   test "hard" do
     assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve()
     assert stats.launched == 1800
-    assert stats.max_active > 100
+    assert stats.max_active > 50
 
     assert solution == [
              [8, 1, 2, 7, 5, 3, 6, 4, 9],
