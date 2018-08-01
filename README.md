@@ -61,7 +61,7 @@ As per above, this may have changed with the `GenServer.cast` change.  It is als
 
 ### Higher initial startup cost
 
-Elixir has a higher startup cost than Ruby — at least for these isimple Sudoku solver programs.  Typically, this is perhaps 3-4x or so, e.g. 40ms for Ruby and 150ms for Elixir.
+Elixir has a higher startup cost than Ruby — at least for these simple Sudoku solver programs.  Typically, this is perhaps 3-4x or so, e.g. 40ms for Ruby and 150ms for Elixir.
 
 Ruby's startup time improves more with better CPUs than Elixir's does.  This suggests Ruby's startup is more about speed (including parsing the code from scratch), while Elixir's is probably a bit more about scheduling.
 
