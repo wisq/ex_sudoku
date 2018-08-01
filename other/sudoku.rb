@@ -102,10 +102,24 @@ end
 
 def solve_file(file)
   puts "Solving: #{file}"
-  queue = [Board.from_file(file)]
-  solved = []
+  board = Board.from_file(file)
 
   start = Time.now
+  solved = solve_board(board)
+  duration = "%.2f" % [(Time.now - start) * 1000]
+
+  puts "#{solved.count} solutions in #{duration} ms:"
+  solved.each do |board|
+    puts
+    puts board.to_string
+  end
+
+  puts
+end
+
+def solve_board(board)
+  queue = [board]
+  solved = []
 
   until queue.empty?
     board = queue.shift
@@ -120,17 +134,19 @@ def solve_file(file)
     end
   end
 
-  duration = "%.2f" % [(Time.now - start) * 1000]
-
-  puts "#{solved.count} solutions in #{duration} ms:"
-  solved.each do |board|
-    puts
-    puts board.to_string
-  end
-
-  puts
+  solved
 end
 
-ARGV.each do |file|
-  solve_file(file)
+if ARGV.first == "--benchmark"
+  board = Board.from_file(ARGV[1])
+
+  $stdin.each_line do |id|
+    solve_board(board)
+    $stdout.puts(id)
+    $stdout.flush()
+  end
+else
+  ARGV.each do |file|
+    solve_file(file)
+  end
 end

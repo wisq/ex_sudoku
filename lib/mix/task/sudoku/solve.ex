@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Solve do
+defmodule Mix.Tasks.Sudoku.Solve do
   use Mix.Task
 
   @shortdoc "Solve Sudoku puzzle files"
