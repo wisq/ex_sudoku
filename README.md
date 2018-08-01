@@ -2,7 +2,7 @@
 
 This is just a random one-day project I threw together to solve Sudoku puzzles concurrently using Elixir.
 
-I don't claim this to be a particularly efficient method, nor do I have any expertise in writing Sudoku solvers.  This was simply an educational project, and a benchmark against a similar Ruby solution.
+I don't claim this to be a particularly efficient method, nor do I have any expertise in writing Sudoku solvers.  This was simply an educational project, and a benchmark against a similar Ruby solution that I wrote a few years ago.
 
 ## Algorithm
 
