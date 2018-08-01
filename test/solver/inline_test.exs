@@ -1,14 +1,12 @@
 # Split into multiple modules for maximum concurrency.
 
-defmodule Sudoku.SolverTest.Easy do
+defmodule Sudoku.Solver.InlineTest.Easy do
   use ExUnit.Case, async: true
   alias Sudoku.Puzzle
   alias Sudoku.Solver
 
   test "easy" do
-    assert {[solution], stats} = Puzzle.read("data/easy.txt") |> Solver.solve()
-    assert stats.launched == 1
-    assert stats.max_active == 1
+    assert [solution] = Puzzle.read("data/easy.txt") |> Solver.solve_inline()
 
     assert solution == [
              [5, 2, 8, 6, 4, 7, 1, 9, 3],
@@ -24,9 +22,7 @@ defmodule Sudoku.SolverTest.Easy do
   end
 
   test "puz1" do
-    assert {[solution], stats} = Puzzle.read("data/puz1.txt") |> Solver.solve()
-    assert stats.launched == 2
-    assert stats.max_active == 1 || stats.max_active == 2
+    assert [solution] = Puzzle.read("data/puz1.txt") |> Solver.solve_inline()
 
     assert solution == [
              [7, 9, 6, 8, 5, 4, 3, 2, 1],
@@ -42,9 +38,7 @@ defmodule Sudoku.SolverTest.Easy do
   end
 
   test "puz2" do
-    assert {[solution], stats} = Puzzle.read("data/puz2.txt") |> Solver.solve()
-    assert stats.launched == 32
-    assert stats.max_active > 1
+    assert [solution] = Puzzle.read("data/puz2.txt") |> Solver.solve_inline()
 
     assert solution == [
              [7, 9, 2, 8, 3, 5, 4, 6, 1],
@@ -60,9 +54,7 @@ defmodule Sudoku.SolverTest.Easy do
   end
 
   test "puz3" do
-    assert {[solution], stats} = Puzzle.read("data/puz3.txt") |> Solver.solve()
-    assert stats.launched == 4
-    assert stats.max_active > 1
+    assert [solution] = Puzzle.read("data/puz3.txt") |> Solver.solve_inline()
 
     assert solution == [
              [5, 1, 9, 7, 4, 8, 6, 3, 2],
@@ -78,15 +70,13 @@ defmodule Sudoku.SolverTest.Easy do
   end
 end
 
-defmodule Sudoku.SolverTest.Medium do
+defmodule Sudoku.Solver.InlineTest.Medium do
   use ExUnit.Case, async: true
   alias Sudoku.Puzzle
   alias Sudoku.Solver
 
   test "puz4" do
-    assert {[solution], stats} = Puzzle.read("data/puz4.txt") |> Solver.solve()
-    assert stats.launched == 926
-    assert stats.max_active > 5
+    assert [solution] = Puzzle.read("data/puz4.txt") |> Solver.solve_inline()
 
     assert solution == [
              [7, 8, 2, 4, 5, 3, 6, 1, 9],
@@ -102,9 +92,7 @@ defmodule Sudoku.SolverTest.Medium do
   end
 
   test "puz5" do
-    assert {[solution], stats} = Puzzle.read("data/puz5.txt") |> Solver.solve()
-    assert stats.launched == 736
-    assert stats.max_active > 5
+    assert [solution] = Puzzle.read("data/puz5.txt") |> Solver.solve_inline()
 
     assert solution == [
              [3, 1, 7, 6, 8, 4, 9, 2, 5],
@@ -120,39 +108,13 @@ defmodule Sudoku.SolverTest.Medium do
   end
 end
 
-defmodule Sudoku.SolverTest.Hard do
+defmodule Sudoku.Solver.InlineTest.Hard do
   use ExUnit.Case, async: true
   alias Sudoku.Puzzle
   alias Sudoku.Solver
 
   test "hard" do
-    assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve()
-    assert stats.launched == 1800
-    assert stats.max_active >= 10
-
-    assert solution == [
-             [8, 1, 2, 7, 5, 3, 6, 4, 9],
-             [9, 4, 3, 6, 8, 2, 1, 7, 5],
-             [6, 7, 5, 4, 9, 1, 2, 8, 3],
-             [1, 5, 4, 2, 3, 7, 8, 9, 6],
-             [3, 6, 9, 8, 4, 5, 7, 2, 1],
-             [2, 8, 7, 1, 6, 9, 5, 3, 4],
-             [5, 2, 1, 9, 7, 4, 3, 6, 8],
-             [4, 3, 8, 5, 2, 6, 9, 1, 7],
-             [7, 9, 6, 3, 1, 8, 4, 5, 2]
-           ]
-  end
-end
-
-defmodule Sudoku.SolverTest.Hard.Max do
-  use ExUnit.Case, async: true
-  alias Sudoku.Puzzle
-  alias Sudoku.Solver
-
-  test "hard with max_children: 5" do
-    assert {[solution], stats} = Puzzle.read("data/hard.txt") |> Solver.solve(max_children: 5)
-    assert stats.launched == 1800
-    assert stats.max_active == 5
+    assert [solution] = Puzzle.read("data/hard.txt") |> Solver.solve_inline()
 
     assert solution == [
              [8, 1, 2, 7, 5, 3, 6, 4, 9],

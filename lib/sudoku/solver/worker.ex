@@ -25,6 +25,25 @@ defmodule Sudoku.Solver.Worker do
     end
   end
 
+  def solve_inline(puzzle) do
+    case solve_once(puzzle) do
+      {:ok, ^puzzle} ->
+        [puzzle]
+
+      {:pending, [one]} ->
+        solve_inline(one)
+
+      {:pending, many} ->
+        many
+        |> Task.async_stream(&solve_inline/1)
+        |> Enum.map(fn {:ok, solutions} -> solutions end)
+        |> Enum.concat()
+
+      {:error, _err} ->
+        []
+    end
+  end
+
   def solve_once(puzzle) do
     case cell_with_least_options(puzzle) do
       {1, row, col, [option]} ->

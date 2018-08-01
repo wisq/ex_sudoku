@@ -3,14 +3,24 @@ defmodule Mix.Tasks.Solve do
 
   @shortdoc "Solve Sudoku puzzle files"
 
-  def run(files) do
+  @switches [
+    inline: :boolean
+  ]
+
+  def run(args) do
+    {opts, files} = OptionParser.parse!(args, strict: @switches)
+
     Enum.each(files, fn file ->
       IO.write("Solving: #{file} ")
       puzzle = Sudoku.Puzzle.read(file)
 
       {micros, {solutions, stats}} =
         :timer.tc(fn ->
-          Sudoku.Solver.solve(puzzle)
+          if opts[:inline] do
+            {Sudoku.Solver.solve_inline(puzzle), %{}}
+          else
+            Sudoku.Solver.solve(puzzle)
+          end
         end)
 
       IO.puts("\nGot #{Enum.count(solutions)} solution(s) in #{time_to_string(micros)}:")
@@ -20,11 +30,13 @@ defmodule Mix.Tasks.Solve do
         Sudoku.Puzzle.to_string(solution) |> IO.puts()
       end)
 
-      IO.puts("\nStatistics:")
+      unless Enum.empty?(stats) do
+        IO.puts("\nStatistics:")
 
-      Enum.each(stats, fn {name, value} ->
-        IO.puts("    #{name}: #{value}")
-      end)
+        Enum.each(stats, fn {name, value} ->
+          IO.puts("    #{name}: #{value}")
+        end)
+      end
 
       IO.puts("")
     end)
