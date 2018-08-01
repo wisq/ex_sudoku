@@ -16,23 +16,25 @@ defmodule Mix.Tasks.Sudoku.Benchmark do
   def run(args) do
     {opts, files} = OptionParser.parse!(args, strict: @switches)
     files = Enum.uniq(files)
-    opts = Keyword.merge(@defaults, opts)
 
-    files
-    |> Enum.map(&make_benchee_runs/1)
-    |> List.flatten()
-    |> Benchee.run(opts)
+    opts =
+      Keyword.merge(@defaults, opts)
+      |> Keyword.put(:inputs, Enum.map(files, &make_input/1))
+
+    Benchee.run(
+      [
+        {"ruby", fn {_, ruby} -> ruby_solve(ruby) end},
+        {"inline", fn {puzzle, _} -> Sudoku.Solver.solve_inline(puzzle) end},
+        {"managed", fn {puzzle, _} -> Sudoku.Solver.solve(puzzle) end}
+      ],
+      opts
+    )
   end
 
-  defp make_benchee_runs(file) do
+  defp make_input(file) do
     puzzle = Sudoku.Puzzle.read(file)
     ruby = RubySolver.launch(file)
-
-    [
-      {"#{file} (ruby)", fn -> ruby_solve(ruby) end},
-      {"#{file} (inline)", fn -> Sudoku.Solver.solve_inline(puzzle) end},
-      {"#{file} (managed)", fn -> Sudoku.Solver.solve(puzzle) end}
-    ]
+    {file, {puzzle, ruby}}
   end
 
   defp ruby_solve(ruby) do
