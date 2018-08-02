@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/hard.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.7.1</li>
+    <li>Erlang: 21.0.4</li>
+    <li>Operating system: macOS</li>
+    <li>Available memory: 16 GB</li>
+    <li>CPU Information: Intel(R) Core(TM) i7-3740QM CPU @ 2.70GHz</li>
+    <li>Number of Available Cores: 8</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        <a name="inline"></a>
+        inline
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#individual">
+          <i
+            class="benchee-help-icon icon-question-circle-o"
+            title="Graphs showing the individual run time distribution for inline.
+Run Times Histogram shows the distribution of occurrences of specific run times in buckets.
+Raw Run Times shows all individual recorded run times in the order they were recorded in."
+          ></i>
+        </a>
+      </h2>
+
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left">inline</td>
+        
+        <td>1.62</td>
+        <td>618.46 ms</td>
+        <td>±5.75%</td>
+        <td>610.57 ms</td>
+        <td>548.69 ms</td>
+        <td>725.83 ms</td>
+        <td>49</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="sorted-run-times" class="plot" data-job-name="inline"></div>
+      </section>
+      <section class="benchee-plot-container">
+        <div id="raw-run-times" class="plot" data-job-name="inline"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var measurements = {"run_times":[548692,556367,549281,568563,605755,631462,610238,596694,656552,676969,594260,659382,725825,653591,618468,622991,671231,604064,586018,605900,627480,624371,697657,681238,655112,592108,616247,625066,606082,630338,592370,659422,599172,632831,604929,597577,609698,605346,598700,620332,610571,630514,603721,611312,588025,588126,624148,600495,629250],"statistics":{"average":618460.0204081633,"ips":1.6169193917175646,"maximum":725825,"median":610571.0,"minimum":548692,"mode":null,"percentiles":{"50":610571.0,"99":725825.0},"sample_size":49,"std_dev":35558.69337066171,"std_dev_ips":0.0929656549460005,"std_dev_ratio":0.05749554085516173}};
+      var runTimes     = measurements.run_times;
+      var statistics   = measurements.statistics;
+
+      var inputHeadline = " (data/hard.txt)"
+
+      drawRawRunTimeCharts(runTimes, inputHeadline, statistics);
+      drawRunTimeHistograms(runTimes, inputHeadline);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,262 @@
+
+Git commit: a87fb60e3267d63f04ff68095f5855e4c4f1e631
+Ruby version: ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-darwin16]
+
+Operating System: macOS"
+CPU Information: Intel(R) Core(TM) i7-3740QM CPU @ 2.70GHz
+Number of Available Cores: 8
+Available memory: 16 GB
+Elixir 1.7.1
+Erlang 21.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 10 s
+time: 30 s
+memory time: 0 μs
+parallel: 1
+inputs: data/easy.txt, data/hard.txt, data/harder.txt, data/puz1.txt, data/puz2.txt, data/puz3.txt, data/puz4.txt, data/puz5.txt
+Estimated total run time: 32 min
+
+
+Benchmarking ruby with input data/easy.txt...
+Benchmarking ruby with input data/hard.txt...
+Benchmarking ruby with input data/harder.txt...
+Benchmarking ruby with input data/puz1.txt...
+Benchmarking ruby with input data/puz2.txt...
+Benchmarking ruby with input data/puz3.txt...
+Benchmarking ruby with input data/puz4.txt...
+Benchmarking ruby with input data/puz5.txt...
+Benchmarking inline with input data/easy.txt...
+Benchmarking inline with input data/hard.txt...
+Benchmarking inline with input data/harder.txt...
+Benchmarking inline with input data/puz1.txt...
+Benchmarking inline with input data/puz2.txt...
+Benchmarking inline with input data/puz3.txt...
+Benchmarking inline with input data/puz4.txt...
+Benchmarking inline with input data/puz5.txt...
+Benchmarking managed (10) with input data/easy.txt...
+Benchmarking managed (10) with input data/hard.txt...
+Benchmarking managed (10) with input data/harder.txt...
+Benchmarking managed (10) with input data/puz1.txt...
+Benchmarking managed (10) with input data/puz2.txt...
+Benchmarking managed (10) with input data/puz3.txt...
+Benchmarking managed (10) with input data/puz4.txt...
+Benchmarking managed (10) with input data/puz5.txt...
+Benchmarking managed (100) with input data/easy.txt...
+Benchmarking managed (100) with input data/hard.txt...
+Benchmarking managed (100) with input data/harder.txt...
+Benchmarking managed (100) with input data/puz1.txt...
+Benchmarking managed (100) with input data/puz2.txt...
+Benchmarking managed (100) with input data/puz3.txt...
+Benchmarking managed (100) with input data/puz4.txt...
+Benchmarking managed (100) with input data/puz5.txt...
+Benchmarking managed (1000) with input data/easy.txt...
+Benchmarking managed (1000) with input data/hard.txt...
+Benchmarking managed (1000) with input data/harder.txt...
+Benchmarking managed (1000) with input data/puz1.txt...
+Benchmarking managed (1000) with input data/puz2.txt...
+Benchmarking managed (1000) with input data/puz3.txt...
+Benchmarking managed (1000) with input data/puz4.txt...
+Benchmarking managed (1000) with input data/puz5.txt...
+Benchmarking managed (10000) with input data/easy.txt...
+Benchmarking managed (10000) with input data/hard.txt...
+Benchmarking managed (10000) with input data/harder.txt...
+Benchmarking managed (10000) with input data/puz1.txt...
+Benchmarking managed (10000) with input data/puz2.txt...
+Benchmarking managed (10000) with input data/puz3.txt...
+Benchmarking managed (10000) with input data/puz4.txt...
+Benchmarking managed (10000) with input data/puz5.txt...
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz4_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz2_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_managed__1000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz3_txt_managed__100_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_inline.html
+Generated benchmarks/2013-mbp/html/benchmark_data_easy_txt_ruby.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz5_txt_comparison.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_managed__10_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_harder_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_hard_txt_managed__10000_.html
+Generated benchmarks/2013-mbp/html/benchmark_data_puz1_txt_managed__100_.html
+Opened report using open
+
+##### With input data/easy.txt #####
+Name                      ips        average  deviation         median         99th %
+ruby                   925.50        1.08 ms    ±11.80%        1.04 ms        1.71 ms
+managed (10)           897.21        1.11 ms    ±12.56%        1.06 ms        1.80 ms
+managed (100)          894.23        1.12 ms    ±13.02%        1.06 ms        1.80 ms
+managed (10000)        893.33        1.12 ms    ±12.95%        1.06 ms        1.80 ms
+managed (1000)         886.85        1.13 ms    ±13.40%        1.06 ms        1.80 ms
+inline                 702.98        1.42 ms    ±13.43%        1.35 ms        2.29 ms
+
+Comparison: 
+ruby                   925.50
+managed (10)           897.21 - 1.03x slower
+managed (100)          894.23 - 1.03x slower
+managed (10000)        893.33 - 1.04x slower
+managed (1000)         886.85 - 1.04x slower
+inline                 702.98 - 1.32x slower
+
+##### With input data/hard.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)          1.81      552.41 ms     ±1.11%      551.34 ms      573.04 ms
+managed (100)            1.80      557.01 ms     ±1.80%      555.66 ms      580.21 ms
+managed (10)             1.73      578.97 ms     ±5.23%      568.57 ms      662.27 ms
+managed (1000)           1.67      598.80 ms     ±8.44%      577.76 ms      732.05 ms
+inline                   1.62      618.46 ms     ±5.75%      610.57 ms      725.83 ms
+ruby                     0.25     3947.10 ms     ±0.27%     3946.30 ms     3963.70 ms
+
+Comparison: 
+managed (10000)          1.81
+managed (100)            1.80 - 1.01x slower
+managed (10)             1.73 - 1.05x slower
+managed (1000)           1.67 - 1.08x slower
+inline                   1.62 - 1.12x slower
+ruby                     0.25 - 7.15x slower
+
+##### With input data/harder.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)          0.45         2.24 s     ±1.06%         2.24 s         2.28 s
+managed (100)            0.44         2.26 s     ±0.90%         2.25 s         2.30 s
+managed (10)             0.44         2.29 s     ±1.08%         2.29 s         2.32 s
+inline                   0.42         2.37 s     ±1.23%         2.37 s         2.42 s
+managed (1000)           0.41         2.44 s     ±2.87%         2.45 s         2.57 s
+ruby                   0.0732        13.67 s     ±0.15%        13.66 s        13.69 s
+
+Comparison: 
+managed (10000)          0.45
+managed (100)            0.44 - 1.01x slower
+managed (10)             0.44 - 1.02x slower
+inline                   0.42 - 1.06x slower
+managed (1000)           0.41 - 1.09x slower
+ruby                   0.0732 - 6.10x slower
+
+##### With input data/puz1.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)        176.68        5.66 ms    ±10.91%        5.41 ms        7.94 ms
+managed (100)          175.69        5.69 ms    ±11.27%        5.43 ms        8.00 ms
+managed (10)           175.58        5.70 ms    ±11.36%        5.42 ms        7.98 ms
+managed (1000)         171.24        5.84 ms     ±8.15%        5.78 ms        7.80 ms
+inline                 161.27        6.20 ms     ±9.48%        5.99 ms        8.56 ms
+ruby                    97.07       10.30 ms    ±15.06%        9.27 ms       13.16 ms
+
+Comparison: 
+managed (10000)        176.68
+managed (100)          175.69 - 1.01x slower
+managed (10)           175.58 - 1.01x slower
+managed (1000)         171.24 - 1.03x slower
+inline                 161.27 - 1.10x slower
+ruby                    97.07 - 1.82x slower
+
+##### With input data/puz2.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)         58.96       16.96 ms     ±4.09%       16.74 ms       19.03 ms
+managed (100)           58.62       17.06 ms     ±4.61%       16.79 ms       19.32 ms
+managed (10)            58.16       17.19 ms     ±4.56%       16.90 ms       19.37 ms
+managed (1000)          56.28       17.77 ms     ±5.31%       17.62 ms       20.66 ms
+inline                  54.46       18.36 ms     ±6.27%       18.07 ms       22.26 ms
+ruby                    10.50       95.27 ms     ±4.30%       93.99 ms      107.47 ms
+
+Comparison: 
+managed (10000)         58.96
+managed (100)           58.62 - 1.01x slower
+managed (10)            58.16 - 1.01x slower
+managed (1000)          56.28 - 1.05x slower
+inline                  54.46 - 1.08x slower
+ruby                    10.50 - 5.62x slower
+
+##### With input data/puz3.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (1000)         134.12        7.46 ms     ±7.20%        7.32 ms        9.43 ms
+inline                 133.62        7.48 ms     ±8.39%        7.29 ms        9.83 ms
+managed (100)          130.73        7.65 ms    ±10.26%        7.33 ms        9.52 ms
+managed (10000)        130.71        7.65 ms    ±10.24%        7.33 ms        9.53 ms
+managed (10)           129.93        7.70 ms    ±10.30%        7.36 ms        9.55 ms
+ruby                    69.75       14.34 ms    ±12.86%       13.56 ms       17.78 ms
+
+Comparison: 
+managed (1000)         134.12
+inline                 133.62 - 1.00x slower
+managed (100)          130.73 - 1.03x slower
+managed (10000)        130.71 - 1.03x slower
+managed (10)           129.93 - 1.03x slower
+ruby                    69.75 - 1.92x slower
+
+##### With input data/puz4.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)          4.28      233.85 ms     ±2.23%      232.39 ms      248.91 ms
+managed (100)            4.26      234.81 ms     ±2.46%      234.12 ms      256.80 ms
+managed (10)             4.26      234.94 ms     ±2.31%      234.22 ms      251.21 ms
+inline                   4.23      236.29 ms     ±3.25%      237.26 ms      255.69 ms
+managed (1000)           4.17      239.76 ms     ±6.60%      234.15 ms      316.38 ms
+ruby                     0.74     1343.32 ms     ±0.97%     1341.11 ms     1374.53 ms
+
+Comparison: 
+managed (10000)          4.28
+managed (100)            4.26 - 1.00x slower
+managed (10)             4.26 - 1.00x slower
+inline                   4.23 - 1.01x slower
+managed (1000)           4.17 - 1.03x slower
+ruby                     0.74 - 5.74x slower
+
+##### With input data/puz5.txt #####
+Name                      ips        average  deviation         median         99th %
+managed (10000)          5.00      199.87 ms     ±2.62%      198.53 ms      219.84 ms
+managed (100)            4.93      202.86 ms     ±2.18%      202.59 ms      217.57 ms
+managed (1000)           4.91      203.84 ms     ±2.34%      203.38 ms      218.46 ms
+managed (10)             4.79      208.55 ms     ±6.85%      204.07 ms      304.26 ms
+inline                   4.79      208.78 ms     ±2.04%      207.61 ms      222.76 ms
+ruby                     0.74     1349.17 ms     ±1.01%     1349.33 ms     1379.91 ms
+
+Comparison: 
+managed (10000)          5.00
+managed (100)            4.93 - 1.01x slower
+managed (1000)           4.91 - 1.02x slower
+managed (10)             4.79 - 1.04x slower
+inline                   4.79 - 1.04x slower
+ruby                     0.74 - 6.75x slower

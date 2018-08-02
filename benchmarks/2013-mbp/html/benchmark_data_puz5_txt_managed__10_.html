@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Benchee Report</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/benchee.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontello/css/fontello.css">
+  
+</head>
+
+  <body>
+
+    <div class="header">
+  <h1>benchee report</h1>
+  
+  <span class="input-label">
+    data/puz5.txt
+  </span>
+
+
+  <span class="version-note">
+  <a href="javascript:toggleSystemDataInfo();" title="Click to toggle system info">System info</a>
+</span>
+
+</div>
+
+
+    <article id="system-info" class="benchee-systeminfo" >
+  <h3>System info</h3>
+  <ul class="benchee-systeminfo-list">
+    <li>Elixir: 1.7.1</li>
+    <li>Erlang: 21.0.4</li>
+    <li>Operating system: macOS</li>
+    <li>Available memory: 16 GB</li>
+    <li>CPU Information: Intel(R) Core(TM) i7-3740QM CPU @ 2.70GHz</li>
+    <li>Number of Available Cores: 8</li>
+  </ul>
+</article>
+
+
+    <article>
+      <h2>
+        <a name="managed (10)"></a>
+        managed (10)
+        <a href="https://github.com/PragTob/benchee_html/wiki/Chart-Types#individual">
+          <i
+            class="benchee-help-icon icon-question-circle-o"
+            title="Graphs showing the individual run time distribution for managed (10).
+Run Times Histogram shows the distribution of occurrences of specific run times in buckets.
+Raw Run Times shows all individual recorded run times in the order they were recorded in."
+          ></i>
+        </a>
+      </h2>
+
+      <section>
+        <h3>Data Table</h3>
+<table>
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th>Iterations per Second</th>
+      <th>Average</th>
+      <th>Deviation</th>
+      <th>median</th>
+      <th>minimum</th>
+      <th>maximum</th>
+      <th>Sample size</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+        
+          <td class="text-left">managed (10)</td>
+        
+        <td>4.79</td>
+        <td>208.55 ms</td>
+        <td>±6.85%</td>
+        <td>204.07 ms</td>
+        <td>197.87 ms</td>
+        <td>328.69 ms</td>
+        <td>144</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+      </section>
+
+      <section class="benchee-plot-container">
+        <div id="sorted-run-times" class="plot" data-job-name="managed (10)"></div>
+      </section>
+      <section class="benchee-plot-container">
+        <div id="raw-run-times" class="plot" data-job-name="managed (10)"></div>
+      </section>
+    </article>
+
+    <footer>
+      <a href="https://github.com/PragTob/benchee" target="blank">benchee version: 0.13.1 </a>
+<br/>
+<a href="https://github.com/PragTob/benchee_html" target="blank">benchee_html version: 0.5.0</a>
+
+
+    </footer>
+
+    
+  <script src="assets/javascripts/plotly-1.30.1.min.js"></script>
+  <script src="assets/javascripts/benchee.js"></script>
+
+
+
+    <script>
+      var measurements = {"run_times":[203866,202438,209316,198957,202356,197871,198890,203439,205668,209706,218508,274401,328685,233610,229906,216029,233518,214619,232288,207877,221591,217930,217017,230304,217196,223714,208012,209001,228413,225241,231080,209962,217480,239356,210439,203411,202813,205878,207916,204048,202792,204020,204340,202323,208663,203759,202185,200649,202465,199222,200353,218218,211627,203953,202175,200467,225127,203642,214005,212095,198294,199910,203207,204097,209544,206041,212536,211572,208319,208696,199925,198589,199745,198337,210666,205525,202309,201073,201609,198566,200560,207514,204703,204018,200915,201781,202885,204090,202162,210584,200411,202965,204058,201151,203418,200987,205283,205836,203010,206247,204864,201773,205327,204761,212728,210591,211762,210752,211839,206072,203610,212811,203656,203346,203515,199521,200261,199507,199228,211261,203495,203783,202623,202013,199582,198527,209805,199338,198547,207610,203666,201331,198044,198837,210066,202572,202557,202956,207495,206833,209732,213724,206354,199113],"statistics":{"average":208553.86111111112,"ips":4.794924412678366,"maximum":328685,"median":204074.0,"minimum":197871,"mode":null,"percentiles":{"50":204074.0,"99":304257.2000000006},"sample_size":144,"std_dev":14276.902845564711,"std_dev_ips":0.3282445581535594,"std_dev_ratio":0.06845666999163547}};
+      var runTimes     = measurements.run_times;
+      var statistics   = measurements.statistics;
+
+      var inputHeadline = " (data/puz5.txt)"
+
+      drawRawRunTimeCharts(runTimes, inputHeadline, statistics);
+      drawRunTimeHistograms(runTimes, inputHeadline);
+    </script>
+  </body>
+</html>
